@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { BookOpen, CheckCircle2, ChevronRight, Globe2, Menu, ShieldCheck, X } from "lucide-react";
 import { Language, sections } from "./manualData";
 import { featureSections } from "./featureUpdates";
@@ -46,6 +46,9 @@ const copy = {
 
 function Screenshot({ src, caption, lang }: { src?: string; caption: string; lang: Language }) {
   const [failed, setFailed] = useState(false);
+  useEffect(() => {
+    setFailed(false);
+  }, [src]);
   const c = copy[lang];
   if (!src || failed) {
     return <div className="shot shot-missing"><strong>{c.screenshot}</strong><span>{caption}</span><small>{c.noScreenshot}</small></div>;
@@ -101,7 +104,7 @@ export default function App() {
               <aside className="section-side"><span className="section-number">{section.number}</span><h2>{d.title}</h2><div className="meta"><div><strong>{c.audience}</strong><p>{d.audience}</p></div><div><strong>{c.purpose}</strong><p>{d.purpose}</p></div></div></aside>
               <article className="section-main">
                 <div className="panel"><h3><CheckCircle2 size={18}/>{c.before}</h3><ul>{d.before.map((x,i)=><li key={i}>{x}</li>)}</ul></div>
-                <div className="procedure"><h3>{c.steps}</h3>{d.steps.map((step,i)=><div className="step" key={`${section.id}-${i}`}><div className="step-head"><span>{i+1}</span><div><h4>{step.title}</h4><p>{step.text}</p></div></div><Screenshot src={step.screenshot} caption={step.title} lang={lang}/></div>)}</div>
+                <div className="procedure"><h3>{c.steps}</h3>{d.steps.map((step,i)=><div className="step" key={`${section.id}-${i}`}><div className="step-head"><span>{i+1}</span><div><h4>{step.title}</h4><p>{step.text}</p></div></div><Screenshot key={`${section.id}-${lang}-${i}-${step.screenshot || 'none'}`} src={step.screenshot} caption={step.title} lang={lang}/></div>)}</div>
                 <div className="two-col"><div className="panel warning"><h3><ShieldCheck size={18}/>{c.controls}</h3><ul>{d.controls.map((x,i)=><li key={i}>{x}</li>)}</ul></div><div className="panel success"><h3><CheckCircle2 size={18}/>{c.result}</h3><ul>{d.result.map((x,i)=><li key={i}>{x}</li>)}</ul></div></div>
                 {d.accounting && <div className="panel accounting"><h3>{c.accounting}</h3><ul>{d.accounting.map((x,i)=><li key={i}>{x}</li>)}</ul></div>}
               </article>

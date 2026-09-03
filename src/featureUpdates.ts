@@ -18,43 +18,48 @@ export const featureSections: ManualSection[] = [
       steps: [
         {
           title: "Open Warehouse Stock Levels",
-          text: "From the left navigation, open Procurement & Warehouse → Warehouse Stock Levels. Confirm the warehouse shown at the top of the page. Stock count adjustments are location-specific."
+          text: "From the left navigation, open Procurement & Warehouse → Warehouse Stock Levels. Confirm the warehouse shown at the top of the page. Stock count adjustments are location-specific.",
+          screenshot: "/screenshots/03_warehouse_inventory/21_warehouse_stock_levels_navigation.png"
+        },
+        {
+          title: "Inspect Warehouse Stock Levels overview",
+          text: "Review the Multi-Warehouse Stock & Transfers interface. The top selector displays the active hub (e.g. Sudan Main Warehouse SD-KRT-MAIN), inventory ledger tabs, and the controlled Physical Stock Count panel.",
+          screenshot: "/screenshots/03_warehouse_inventory/22_warehouse_stock_levels_page.png"
         },
         {
           title: "Start Count / Adjust Stock",
-          text: "In the Physical Stock Count panel, click Count / Adjust Stock. The controlled inventory window opens below the application top navigation so all fields and action buttons remain accessible."
+          text: "In the Physical Stock Count panel, click Count / Adjust Stock. The controlled inventory window opens below the application top navigation so all fields and action buttons remain accessible.",
+          screenshot: "/screenshots/03_warehouse_inventory/23_warehouse_stock_count_action.png"
         },
         {
-          title: "Select the product",
-          text: "Search by SKU or product name, then select the exact product. The system displays the current system quantity, reserved quantity and product base cost where available."
+          title: "Controlled stock count modal",
+          text: "The Physical Stock Count / Adjustment modal displays strict operational warnings: always enter the actual counted physical quantity, never a +/- adjustment. Existing historical receipts and deliveries are protected.",
+          screenshot: "/screenshots/03_warehouse_inventory/24_warehouse_stock_count_modal_initial.png"
         },
         {
-          title: "Enter the actual counted quantity",
-          text: "Enter the total quantity physically counted in the selected warehouse. Example: if the system says 1 but warehouse staff physically count 11, enter 11 — do not enter +10. The system calculates the adjustment automatically."
+          title: "Select the product & review Base Cost",
+          text: "Search by SKU or product name, then select the exact product. The system displays current System Qty, Reserved, and Base Cost AED before any adjustment is entered.",
+          screenshot: "/screenshots/03_warehouse_inventory/25_warehouse_stock_count_product_selected.png"
+        },
+        {
+          title: "Enter the actual counted quantity & review adjustment",
+          text: "Enter the total physical count currently in the warehouse (e.g. 10). The system automatically computes the adjustment delta in real time (+10) without manual arithmetic.",
+          screenshot: "/screenshots/03_warehouse_inventory/26_warehouse_stock_count_quantity_adjustment.png"
         },
         {
           title: "Choose the reason and add notes",
-          text: "Choose Initial physical stock count, Cycle count correction, Warehouse recount, or Damaged / missing stock correction. Add a useful note such as the count sheet, bin reference or explanation."
-        },
-        {
-          title: "Review the calculated adjustment",
-          text: "Before posting, verify System Qty, Reserved, Base Cost and Adjustment. A positive adjustment adds newly discovered stock. A negative adjustment removes stock using the current trusted valuation."
+          text: "Select an authoritative adjustment reason: Initial physical stock count, Cycle count correction, Warehouse recount, or Damaged / missing stock correction. Enter reference notes such as the count sheet number or bin location.",
+          screenshot: "/screenshots/03_warehouse_inventory/27_warehouse_stock_count_reason_notes.png"
         },
         {
           title: "Post Stock Count",
-          text: "Click Post Stock Count once. The system updates the physical stock balance, inventory valuation, General Ledger and audit trail together. Historical goods receipts and customer deliveries are not rewritten."
+          text: "Review the completed adjustment and click Post Stock Count once. The system updates physical on-hand quantity, inventory valuation, General Ledger and audit logs atomically.",
+          screenshot: "/screenshots/03_warehouse_inventory/28_warehouse_stock_count_post_action.png"
         },
         {
-          title: "Verify the new balance",
-          text: "After posting, refresh Warehouse Stock Levels and confirm the new on-hand quantity. Check that the stock count status is COUNTED where shown and that the Movement Ledger contains the adjustment."
-        },
-        {
-          title: "Verify accounting",
-          text: "For an upward count, only newly discovered units are valued using the current product base cost, with trusted weighted-average cost used as fallback where applicable. Existing inventory retains its historical value. Downward counts use the current trusted weighted-average cost."
-        },
-        {
-          title: "Continue normal delivery workflow",
-          text: "Once quantity and valuation are reconciled, Sales/Logistics can use Deliver Goods normally. Do not use Stock Count merely to bypass an insufficient-stock warning; the entered quantity must represent a real physical count."
+          title: "Validation controls, audit trail and accounting verification",
+          text: "The interface enforces strict client-side and server-side validation: negative numbers, counts below reserved quantities, or missing product selections are blocked. Once posted, stock increase preserves historical valuation and values newly discovered units at current base cost (Dr 1400 Inventory Asset / Cr 4100 Inventory Adjustment Gain); stock decrease uses trusted weighted-average cost (Dr 5100 Inventory Shrinkage Expense / Cr 1400 Inventory Asset). Sales and Logistics can then proceed with normal delivery workflows.",
+          screenshot: "/screenshots/03_warehouse_inventory/29_warehouse_stock_count_success.png"
         }
       ],
       controls: [
@@ -72,8 +77,8 @@ export const featureSections: ManualSection[] = [
         "Phase 4A goods-receipt history and Phase 4B customer-delivery/COGS history remain unchanged."
       ],
       accounting: [
-        "Upward stock count: Dr Inventory Asset (1400) / Cr Inventory Adjustment Gain (4100) for the value of newly discovered units.",
-        "Downward stock count: Dr Inventory Shrinkage Expense (5100) / Cr Inventory Asset (1400) using the trusted weighted-average cost.",
+        "Stock increase (upward count): Existing historical valuation is preserved; only newly discovered units receive the current allowed adjustment cost (current product base cost or trusted WAC fallback). Inventory Asset (1400) increases (Dr) and Inventory Adjustment Gain (4100) is credited (Cr).",
+        "Stock decrease (downward count): Uses trusted weighted-average cost. Inventory Asset (1400) decreases (Cr) and Inventory Shrinkage Expense (5100) is debited (Dr).",
         "Existing units keep their historical valuation; the workflow recalculates the resulting weighted-average cost without rewriting historical transactions.",
         "Example: existing 1 unit valued at AED 23, physical count 11, current base cost AED 30 → add 10 units at AED 30 = AED 300; new inventory value AED 323; new WAC ≈ AED 29.3636."
       ]
@@ -92,43 +97,48 @@ export const featureSections: ManualSection[] = [
       steps: [
         {
           title: "فتح مستويات مخزون المستودع",
-          text: "من القائمة الجانبية افتح المشتريات والمستودع ← مستويات مخزون المستودع. تأكد من اسم المستودع الظاهر أعلى الصفحة لأن كل عملية جرد مرتبطة بموقع محدد."
+          text: "من القائمة الجانبية افتح المشتريات والمستودع ← مستويات مخزون المستودع. تأكد من اسم المستودع الظاهر أعلى الصفحة لأن كل عملية جرد مرتبطة بموقع محدد.",
+          screenshot: "/screenshots/03_warehouse_inventory/21_warehouse_stock_levels_navigation.png"
+        },
+        {
+          title: "مراجعة صفحة مستويات مخزون المستودع",
+          text: "راجع واجهة إدارة المخازن المتعددة والمحولات، حيث يظهر المستودع النشط ومحدد الفروع وسجل الحركات وبطاقة الجرد الفعلي المنضبط.",
+          screenshot: "/screenshots/03_warehouse_inventory/22_warehouse_stock_levels_page.png"
         },
         {
           title: "بدء الجرد / تعديل المخزون",
-          text: "من بطاقة الجرد الفعلي للمخزون اضغط جرد / تعديل المخزون. تفتح نافذة الإجراء المنضبط أسفل شريط التنقل العلوي بحيث تبقى جميع الحقول والأزرار قابلة للوصول."
+          text: "من بطاقة الجرد الفعلي للمخزون اضغط جرد / تعديل المخزون. تفتح نافذة الإجراء المنضبط أسفل شريط التنقل العلوي بحيث تبقى جميع الحقول والأزرار قابلة للوصول.",
+          screenshot: "/screenshots/03_warehouse_inventory/23_warehouse_stock_count_action.png"
         },
         {
-          title: "اختيار المنتج",
-          text: "ابحث برمز SKU أو اسم المنتج ثم اختر المنتج الصحيح. يعرض النظام كمية النظام الحالية والكمية المحجوزة وتكلفة الأساس إذا كانت متاحة."
+          title: "نافذة الجرد الفعلي للمخزون",
+          text: "تعرض نافذة الجرد الفعلي تحذيراً تشغيلياً مشدداً: أدخل دائماً الكمية الفعلية الكاملة التي تم جردها وليس فارق الزيادة أو النقصان، مع الحفاظ الكامل على الحركات التاريخية.",
+          screenshot: "/screenshots/03_warehouse_inventory/24_warehouse_stock_count_modal_initial.png"
         },
         {
-          title: "إدخال الكمية الفعلية التي تم جردها",
-          text: "أدخل إجمالي الكمية الموجودة فعلياً في المستودع المحدد. مثال: إذا كان النظام يعرض 1 وتم عد 11 قطعة فعلياً، أدخل 11 وليس +10. يحسب النظام التعديل تلقائياً."
+          title: "اختيار المنتج ومراجعة تكلفة الأساس",
+          text: "ابحث برمز SKU أو اسم المنتج ثم اختر المنتج الصحيح. يعرض النظام كمية النظام الحالية والكمية المحجوزة وتكلفة الأساس بالدرهم الإماراتي قبل إدخال أي تعديل.",
+          screenshot: "/screenshots/03_warehouse_inventory/25_warehouse_stock_count_product_selected.png"
+        },
+        {
+          title: "إدخال الكمية الفعلية ومراجعة التعديل المحسوب",
+          text: "أدخل إجمالي الكمية الفعلية الموجودة في المستودع (مثال: 10). يقوم النظام باحتساب قيمة التعديل آلياً في الوقت الفعلي (+10) دون الحاجة لحساب يدوي.",
+          screenshot: "/screenshots/03_warehouse_inventory/26_warehouse_stock_count_quantity_adjustment.png"
         },
         {
           title: "اختيار السبب وإضافة الملاحظات",
-          text: "اختر جرد فعلي أولي أو تصحيح جرد دوري أو إعادة عد المستودع أو تصحيح مخزون تالف/مفقود. أضف ملاحظة مفيدة مثل رقم ورقة الجرد أو موقع التخزين أو سبب التعديل."
-        },
-        {
-          title: "مراجعة التعديل المحسوب",
-          text: "قبل الترحيل راجع كمية النظام والمحجوز والتكلفة الأساسية وقيمة التعديل. التعديل الموجب يضيف مخزوناً تم اكتشافه حديثاً، والتعديل السالب يخفض المخزون وفق التقييم الموثوق الحالي."
+          text: "اختر سبب الجرد المعتمد: جرد فعلي أولي، أو تصحيح جرد دوري، أو إعادة عد المستودع، أو تصحيح مخزون تالف/مفقود، مع إدخال رقم ورقة الجرد أو موقع التخزين في الملاحظات.",
+          screenshot: "/screenshots/03_warehouse_inventory/27_warehouse_stock_count_reason_notes.png"
         },
         {
           title: "ترحيل الجرد",
-          text: "اضغط ترحيل الجرد مرة واحدة. يقوم النظام بتحديث الكمية الفعلية وتقييم المخزون ودفتر الأستاذ وسجل التدقيق معاً، دون إعادة كتابة الاستلامات أو تسليمات العملاء التاريخية."
+          text: "راجع بيانات التعديل واضغط زر ترحيل الجرد مرة واحدة. يقوم النظام بتحديث الكمية الفعلية وتقييم المخزون ودفتر الأستاذ وسجل التدقيق بشكل متزامن.",
+          screenshot: "/screenshots/03_warehouse_inventory/28_warehouse_stock_count_post_action.png"
         },
         {
-          title: "التحقق من الرصيد الجديد",
-          text: "بعد الترحيل حدّث صفحة مستويات المخزون وتأكد من الكمية الجديدة. تحقق من ظهور حالة COUNTED حيثما كانت معروضة ومن وجود حركة التعديل في سجل الحركات."
-        },
-        {
-          title: "التحقق من الأثر المحاسبي",
-          text: "في حالة زيادة الجرد يتم تقييم الوحدات المكتشفة حديثاً فقط بتكلفة الأساس الحالية للمنتج، مع استخدام متوسط التكلفة المرجح الموثوق كبديل عند الحاجة. يحتفظ المخزون الحالي بقيمته التاريخية. أما النقص فيستخدم متوسط التكلفة المرجح الموثوق الحالي."
-        },
-        {
-          title: "العودة إلى مسار التسليم الطبيعي",
-          text: "بعد مطابقة الكمية والتقييم يمكن للمبيعات/اللوجستيات استخدام تسليم البضائع بشكل طبيعي. لا تستخدم الجرد لتجاوز رسالة عدم كفاية المخزون؛ يجب أن تمثل الكمية المدخلة جرداً فعلياً حقيقياً."
+          title: "ضوابط التحقق وحماية البيانات والتحقق المحاسبي",
+          text: "يفرض النظام تدقيقاً مشدداً على المدخلات: يُمنع إدخال أرقام سالبة أو كميات أقل من المحجوز أو ترحيل جرد دون تحديد منتج. وعند الترحيل، تقيم الزيادة الوحدات الجديدة بتكلفة الأساس (مدين 1400 أصل المخزون / دائن 4100 أرباح تعديل المخزون)، بينما يستخدم النقص متوسط التكلفة المرجح (مدين 5100 مصروف عجز المخزون / دائن 1400 أصل المخزون)، لتتمكن المبيعات واللوجستيات من متابعة مسار التسليم بشكل طبيعي.",
+          screenshot: "/screenshots/03_warehouse_inventory/29_warehouse_stock_count_success.png"
         }
       ],
       controls: [
@@ -146,8 +156,8 @@ export const featureSections: ManualSection[] = [
         "يبقى تاريخ استلام البضائع في المرحلة 4A وتاريخ تسليم العميل/COGS في المرحلة 4B دون تغيير."
       ],
       accounting: [
-        "زيادة الجرد: مدين أصل المخزون (1400) / دائن أرباح تعديل المخزون (4100) بقيمة الوحدات المكتشفة حديثاً.",
-        "نقص الجرد: مدين مصروف عجز المخزون (5100) / دائن أصل المخزون (1400) باستخدام متوسط التكلفة المرجح الموثوق.",
+        "زيادة المخزون (زيادة الجرد): يتم الحفاظ على التقييم التاريخي السابق؛ وتُقيّم الوحدات المكتشفة حديثاً فقط بتكلفة الأساس الحالية المسموح بها (أو متوسط التكلفة الموثوق كبديل). يزداد أصل المخزون (1400) كمدين (Dr) وتُقيد أرباح تعديل المخزون (4100) كدائن (Cr).",
+        "نقص المخزون (نقص الجرد): يستخدم متوسط التكلفة المرجح الموثوق. ينخفض أصل المخزون (1400) كدائن (Cr) ويُقيد مصروف عجز المخزون (5100) كمدين (Dr).",
         "تحتفظ الوحدات الحالية بتقييمها التاريخي ويعيد النظام احتساب متوسط التكلفة الناتج دون إعادة كتابة المعاملات السابقة.",
         "مثال: وحدة موجودة بقيمة 23 درهماً، الجرد الفعلي 11، تكلفة الأساس الحالية 30 درهماً ← إضافة 10 وحدات × 30 = 300 درهم؛ قيمة المخزون الجديدة 323 درهماً؛ متوسط التكلفة الجديد ≈ 29.3636 درهماً."
       ]

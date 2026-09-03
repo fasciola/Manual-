@@ -47,6 +47,21 @@
   - **Estimated Undelivered COGS:** 1,568.80 AED (calculated from order-time cost snapshots and freight rules)
   - Clear amber explanatory banner informing executives of exact valuation methodology.
 
+### Warehouse Stock Count & Controlled Adjustments
+- **Step Visuals Verified:** Successfully captured high-resolution screenshots (`21` through `29`) under `public/screenshots/03_warehouse_inventory/` displaying:
+  - `21_warehouse_stock_levels_navigation.png`: Left sidebar navigation highlighting Procurement & Warehouse → Warehouse Stock Levels.
+  - `22_warehouse_stock_levels_page.png`: Multi-warehouse overview with active location selector (`SD-KRT-MAIN`), ledger tabs, and the controlled Physical Stock Count panel.
+  - `23_warehouse_stock_count_action.png`: Count / Adjust Stock trigger button prominently presented within the stock count card.
+  - `24_warehouse_stock_count_modal_initial.png`: Controlled adjustment dialog displaying the strict operational warning banner (actual physical count, not +/- difference).
+  - `25_warehouse_stock_count_product_selected.png`: Product lookup and selection (`QOS-TSHR-007`) revealing System Qty, Reserved, Base Cost (30.00 AED), and initial Adjustment metrics.
+  - `26_warehouse_stock_count_quantity_adjustment.png`: Real-time adjustment calculation (+10) automatically rendered upon physical count entry.
+  - `27_warehouse_stock_count_reason_notes.png`: Authoritative reason dropdown options (Initial count, Cycle count, Recount, Damaged/missing) and reference count sheet notes.
+  - `28_warehouse_stock_count_post_action.png`: Fully completed adjustment form with primary Post Stock Count button enabled and focused immediately before submission.
+  - `29_warehouse_stock_count_success.png`: Controlled client-side validation guard enforcing positive count input and preventing malformed transactions from posting to the database.
+- **Production Audit & Safety Limitation (`30_warehouse_stock_count_updated_stock.png`):**
+  - **Live Ledger Protection:** To safeguard production accounting and audit integrity, real transactions against customer-linked SKUs (`QOS-TSHR-007`) were not forced on the live ERP instance. Instead, the strict client-side validation guard was photographed for `29_warehouse_stock_count_success.png`.
+  - **Frontend Table Query Alignment:** In the live ERP frontend, the stock table queries `stock_levels` using `.eq("location", locationCode)` whereas the PostgreSQL schema maintains `location_id` (UUID). As a result, the live table currently renders the zero-state banner (`No stock records for this location`) rather than active SKU rows until the query parameter is updated in the ERP release. Per safety instructions, screenshot 30 was not fabricated.
+
 ## 3. Visual & Data Integrity
 
 - All screenshots captured at full desktop resolution (1600 × 1000) preserving complete top headers, navigation sidebars, role badges, currency toggles, action buttons, and financial totals.

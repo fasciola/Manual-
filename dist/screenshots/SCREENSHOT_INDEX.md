@@ -133,4 +133,18 @@ This comprehensive screenshot archive serves as the authoritative, end-to-end vi
 | `09_admin_provision_user_form.png` | **System Administration & Security** | `/admin/users` | Super Admin / System Administrator | Provision New User Form | Account provisioning form with role selection and company binding | `USER-NEW` |
 | `09_admin_system_settings.png` | **SYSTEM_ADMIN** | `/` | System User | 09_admin_system_settings | Visual interface view | `REF` |
 | `10_admin_pricing_engine_settings.png` | **SYSTEM_ADMIN** | `/` | System User | 10_admin_pricing_engine_settings | Visual interface view | `REF` |
-| `11_admin_audit_logs.png` | **SYSTEM_ADMIN** | `/` | System User | 11_admin_audit_logs | Visual interface view | `REF` |
+| `11_admin_audit_logs.png` | **System Administration & Security** | `/` | System User | 11_admin_audit_logs | Visual interface view | `REF` |
+
+## Warehouse Stock Count / Adjust Stock
+
+| File Name | Department | Page / Screen | User Role | Action Being Demonstrated | Expected Result | Related Record / Reference |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `21_warehouse_stock_levels_navigation.png` | **Warehouse & Inventory Control** | `/inventory/stock` | Warehouse Supervisor / Inventory Controller / Admin | Left Navigation Selection | Sidebar highlighting Procurement & Warehouse → Warehouse Stock Levels | `NAV-STK` |
+| `22_warehouse_stock_levels_page.png` | **Warehouse & Inventory Control** | `/inventory/stock` | Warehouse Supervisor / Inventory Controller / Admin | Warehouse Stock Levels Page Overview | Multi-Warehouse Stock & Transfers interface with location selector, inventory ledger tabs, and Physical Stock Count panel | `STK-LEVELS` |
+| `23_warehouse_stock_count_action.png` | **Warehouse & Inventory Control** | `/inventory/stock` | Warehouse Supervisor / Inventory Controller / Admin | Count / Adjust Stock Trigger | Primary action button within Physical Stock Count panel initiating controlled adjustment modal | `STK-CNT-ACT` |
+| `24_warehouse_stock_count_modal_initial.png` | **Warehouse & Inventory Control** | `/inventory/stock` | Warehouse Supervisor / Inventory Controller / Admin | Controlled Stock Count Dialog | Controlled adjustment modal displaying strict physical count warning, product selector, counted quantity input, and reason selector | `STK-CNT-MODAL` |
+| `25_warehouse_stock_count_product_selected.png` | **Warehouse & Inventory Control** | `/inventory/stock` | Warehouse Supervisor / Inventory Controller / Admin | Product Selection & Metric Summary | Selected SKU displaying System Qty, Reserved, Base Cost, and initial Adjustment metrics | `QOS-TSHR-007` |
+| `26_warehouse_stock_count_quantity_adjustment.png` | **Warehouse & Inventory Control** | `/inventory/stock` | Warehouse Supervisor / Inventory Controller / Admin | Counted Quantity Entry & Auto-Calculation | Entry of actual physical count automatically computing real-time positive (+10) adjustment | `STK-CNT-ADJ` |
+| `27_warehouse_stock_count_reason_notes.png` | **Warehouse & Inventory Control** | `/inventory/stock` | Warehouse Supervisor / Inventory Controller / Admin | Adjustment Reason & Reference Notes | Expanded Reason dropdown (Initial physical count, Cycle count, Recount, Damaged) and reference count sheet note | `STK-CNT-REASON` |
+| `28_warehouse_stock_count_post_action.png` | **Warehouse & Inventory Control** | `/inventory/stock` | Warehouse Supervisor / Inventory Controller / Admin | Post Stock Count Action | Completed form with active Post Stock Count action button ready for transactional submission | `STK-CNT-POST` |
+| `29_warehouse_stock_count_success.png` | **Warehouse & Inventory Control** | `/inventory/stock` | Warehouse Supervisor / Inventory Controller / Admin | Controlled Validation & Input Protection | Controlled client-side validation guard enforcing positive count entry and protecting database integrity | `STK-CNT-VAL` |
