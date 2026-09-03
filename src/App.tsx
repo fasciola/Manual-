@@ -1,6 +1,9 @@
 import { useMemo, useState } from "react";
 import { BookOpen, CheckCircle2, ChevronRight, Globe2, Menu, ShieldCheck, X } from "lucide-react";
 import { Language, sections } from "./manualData";
+import { featureSections } from "./featureUpdates";
+
+const allSections = [...sections, ...featureSections];
 
 const copy = {
   en: {
@@ -18,7 +21,7 @@ const copy = {
     noScreenshot: "Screenshot asset not loaded in this repository yet.",
     open: "Open Quartzite Orders",
     end: "End-to-end operating flow",
-    flow: "Quotation → Sales Order → Inventory Request → Approval → Purchase Order → Confirm PO → Receive Goods → Stock & Valuation → Deliver Goods → COGS → Customer Invoice → Customer Receipt → Cash & Bank → Profit Analytics",
+    flow: "Quotation → Sales Order → Inventory Request → Approval → Purchase Order → Confirm PO → Receive Goods → Stock & Valuation → Stock Count / Adjust Stock (when required) → Deliver Goods → COGS → Customer Invoice → Customer Receipt → Cash & Bank → Profit Analytics",
     top: "Back to top"
   },
   ar: {
@@ -36,7 +39,7 @@ const copy = {
     noScreenshot: "ملف الصورة غير موجود في المستودع حتى الآن.",
     open: "فتح نظام كوارتزايت أوردرز",
     end: "المسار التشغيلي من البداية للنهاية",
-    flow: "عرض السعر ← طلب المبيعات ← طلب المخزون ← الاعتماد ← أمر الشراء ← تأكيد PO ← استلام البضائع ← المخزون والتقييم ← تسليم العميل ← COGS ← فاتورة العميل ← التحصيل ← النقد والبنك ← تحليل الربحية",
+    flow: "عرض السعر ← طلب المبيعات ← طلب المخزون ← الاعتماد ← أمر الشراء ← تأكيد PO ← استلام البضائع ← المخزون والتقييم ← الجرد / تعديل المخزون عند الحاجة ← تسليم العميل ← COGS ← فاتورة العميل ← التحصيل ← النقد والبنك ← تحليل الربحية",
     top: "العودة للأعلى"
   }
 };
@@ -60,7 +63,7 @@ export default function App() {
   const [menu, setMenu] = useState(false);
   const c = copy[lang];
   const rtl = lang === "ar";
-  const chapterLinks = useMemo(() => sections.map(s => ({ id: s.id, number: s.number, title: s[lang].title })), [lang]);
+  const chapterLinks = useMemo(() => allSections.map(s => ({ id: s.id, number: s.number, title: s[lang].title })), [lang]);
 
   return (
     <div id="top" dir={rtl ? "rtl" : "ltr"} className="app">
@@ -85,13 +88,13 @@ export default function App() {
           </div>
           <div className="rules">
             <div><strong>{lang === "en" ? "Currency rule" : "قاعدة العملات"}</strong><p>{lang === "en" ? "Customer quotations, sales orders and customer invoices are presented in USD where configured. Supplier purchasing, inventory valuation, COGS and core accounting are maintained in AED." : "تظهر عروض الأسعار وطلبات المبيعات وفواتير العملاء بالدولار عند تفعيل ذلك، بينما تتم المشتريات وتقييم المخزون وCOGS والمحاسبة الأساسية بالدرهم."}</p></div>
-            <div><strong>{lang === "en" ? "Workflow rule" : "قاعدة سير العمل"}</strong><p>{lang === "en" ? "Use Confirm, Receive Goods, Deliver Goods, Record Payment and Pay Supplier. These actions create stock, valuation, audit and accounting effects." : "استخدم أزرار Confirm وReceive Goods وDeliver Goods وRecord Payment وPay Supplier لأنها تنشئ حركات المخزون والتقييم والتدقيق والقيود."}</p></div>
+            <div><strong>{lang === "en" ? "Workflow rule" : "قاعدة سير العمل"}</strong><p>{lang === "en" ? "Use Confirm, Receive Goods, Stock Count / Adjust Stock, Deliver Goods, Record Payment and Pay Supplier. These actions create controlled stock, valuation, audit and accounting effects." : "استخدم أزرار Confirm وReceive Goods وStock Count / Adjust Stock وDeliver Goods وRecord Payment وPay Supplier لأنها تنشئ حركات مخزون وتقييم وتدقيق وقيوداً محاسبية مضبوطة."}</p></div>
           </div>
         </section>
 
         <section className="contents"><h2>{lang === "en" ? "Manual chapters" : "فصول الدليل"}</h2><div className="chapter-grid">{chapterLinks.map(x => <a key={x.id} href={`#${x.id}`}><span>{x.number}</span><strong>{x.title}</strong></a>)}</div></section>
 
-        {sections.map(section => {
+        {allSections.map(section => {
           const d = section[lang];
           return (
             <section className="manual-section" id={section.id} key={section.id}>
